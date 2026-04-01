@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import {useState} from 'react';
 import axios from 'axios';
 import type { ApiTransactionsResponse } from '../types/finance';
+import type { ApiDashboardResponse } from '../types/dashboard'; // Added this import
 import LoadingScreen  from '../components/LoadingScreen';
 
 // Define a local interface for your table rows if you haven't already
@@ -31,7 +32,7 @@ const fetchTransactions = async (): Promise<TransactionRow[]> => {
   // Reconstruct the real URL by replacing the dummy character
   const cleanUrl = envUrl.replace('%', '.');
 
-  const { data } = await axios.get<ApiDashboardResponse>(`${cleanUrl}/transactions`);
+  const { data } = await axios.get<ApiTransactionsResponse>(`${cleanUrl}/transactions`);
   
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
