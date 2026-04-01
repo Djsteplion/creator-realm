@@ -26,9 +26,13 @@ type FilterStatus = 'ALL' | 'SUCCESS' | 'PENDING' | 'FAILED';
 
 
 const fetchTransactions = async (): Promise<TransactionRow[]> => {
-  const { data } = await axios.get<ApiTransactionsResponse>(
-    `${import.meta.env.VITE_API_BASE_URL}/transactions`
-  );
+ const envUrl = import.meta.env.VITE_API_BASE_URL;
+  
+  // Reconstruct the real URL by replacing the dummy character
+  const cleanUrl = envUrl.replace('%', '.');
+
+  const { data } = await axios.get<ApiDashboardResponse>(`${cleanUrl}/transactions`);
+  
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return data.data.map((tx: any) => {
