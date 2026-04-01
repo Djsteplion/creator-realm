@@ -27,13 +27,13 @@ const iconMap: Record<string, string> = {
 };
 
 const fetchDashboard = async (): Promise<ApiDashboardResponse> => {
-  const { data } = await axios.get<ApiDashboardResponse>(
-    `${import.meta.env.VITE_API_BASE_URL}/dashboard`
-  );
+  const envUrl = import.meta.env.VITE_API_BASE_URL;
+  
+  // Reconstruct the real URL by replacing the dummy character
+  const cleanUrl = envUrl.replace('%', '.');
 
-  // Map the API data to your UI's DashboardCard structure
+  const { data } = await axios.get<ApiDashboardResponse>(`${cleanUrl}/dashboard`);
   return data;
-
 };
 
 const Dashboard = () => {
