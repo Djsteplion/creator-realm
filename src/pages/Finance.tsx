@@ -3,7 +3,7 @@ import StatusBadge from '../components/finance/StatusBadge';
 import FinanceCard from '../components/finance/FinanceCard';
 import type {DashboardCard} from '../types/DashboardCard';
 import greenMoney from '../assets/greenMoney.png'
-import blueMoney from '../assets/blueMoney.png'
+import blueMoney from '../assets/bluemoney.png'
 import greyMoney from '../assets/greyMoney.png'
 import { useQuery } from '@tanstack/react-query';
 import {useState} from 'react';
