@@ -8,7 +8,7 @@ import greyMoney from '../assets/greyMoney.png'
 import { useQuery } from '@tanstack/react-query';
 import {useState} from 'react';
 import axios from 'axios';
-import type {ApiTransactionsResponse} from '../types/finance';
+import type { ApiTransactionsResponse } from '../types/finance';
 import LoadingScreen  from '../components/LoadingScreen';
 
 // Define a local interface for your table rows if you haven't already
