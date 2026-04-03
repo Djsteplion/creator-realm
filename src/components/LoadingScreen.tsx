@@ -7,7 +7,7 @@ const LoadingScreen = () => {
         <img 
           src={logo} 
           alt="Loading..." 
-          className="w-24 h-24 md:w-32 md:h-32 object-contain animate-pulse-zoom" 
+          className="pulse-zoom" 
         />
       </div>
     </div>
