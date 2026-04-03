@@ -23,7 +23,7 @@ const DashBoardCard = ({
         <span className={`text-[8px] md:text-[11px] font-semibold px-2 py-0.5 rounded-full ${
           isPositive ? 'text-green-600 bg-green-50' : 'text-red-600 bg-red-50'
         }`}>
-          {isPositive ? '+' : '-'}{trendPercentage} from last month
+          {isPositive ? '+' : ' '}{trendPercentage} from last month
         </span>
       </div>
 
