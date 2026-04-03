@@ -23,13 +23,11 @@ const iconMap: Record<string, string> = {
   total_transactions: blueUser,
   pending_transactions: brownWarning,
   failed_transactions: redMoney,
-  // Add any other IDs returned by your API here
 };
 
 const fetchDashboard = async (): Promise<ApiDashboardResponse> => {
   const envUrl = import.meta.env.VITE_API_BASE_URL;
   
-  // Reconstruct the real URL by replacing the dummy character
   const cleanUrl = envUrl.replace('%', '.');
 
   const { data } = await axios.get<ApiDashboardResponse>(`${cleanUrl}/dashboard`);
@@ -185,7 +183,7 @@ const Dashboard = () => {
       <div className="flex justify-between items-center mb-8 bg-[#ffffff] px-3 py-2 border-b border-b-neutral-300">
         <h1 className="text-[16px] md:text-2xl font-bold text-slate-900">Dashboard</h1>
         
-        {/* FIX: Added value and onChange to make the filter actually work */}
+        {/* filter */}
         <select 
           value={viewType}
           onChange={(e) => setViewType(e.target.value as 'Month' | 'Year')}
@@ -196,7 +194,7 @@ const Dashboard = () => {
         </select>
       </div>
 
-      {/* The 3-Column Grid for API Data */}
+      {/* 3-Column Grid for API Data */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6 mx-2 md:mx-3">
         {data?.data.summaryCards.map((item: any) => (
           <DashBoardCard 
@@ -204,7 +202,7 @@ const Dashboard = () => {
             id={item.id}
             // Logic to change title based on filter
             title={item.id === 'total_revenue' && viewType === 'Year' ? 'Total Revenue (Year)' : item.title}
-            // FIX: Using revenueDisplay (the variable from useMemo)
+            //  Used revenueDisplay (the variable from useMemo)
             value={item.id === 'total_revenue' ? `₦${revenueDisplay}` : item.value.toLocaleString()}
             trendPercentage={`${item.changePercent}%`}
             trendDirection={item.trend}
