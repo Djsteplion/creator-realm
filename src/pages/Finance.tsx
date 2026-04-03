@@ -11,7 +11,7 @@ import axios from 'axios';
 import type { ApiTransactionsResponse } from '../types/finance';
 import LoadingScreen  from '../components/LoadingScreen';
 
-// Define a local interface for your table rows if you haven't already
+// interface
 interface TransactionRow {
   id: string;
   fromTo: string;
@@ -21,14 +21,14 @@ interface TransactionRow {
   status: string;
 }
 
-// Define the filter type
+// filter type
 type FilterStatus = 'ALL' | 'SUCCESS' | 'PENDING' | 'FAILED';
 
 
 const fetchTransactions = async (): Promise<TransactionRow[]> => {
  const envUrl = import.meta.env.VITE_API_BASE_URL;
   
-  // Reconstruct the real URL by replacing the dummy character
+  
   const cleanUrl = envUrl.replace('%', '.');
 
   const { data } = await axios.get<ApiTransactionsResponse>(`${cleanUrl}/transactions`);
@@ -52,7 +52,7 @@ const fetchTransactions = async (): Promise<TransactionRow[]> => {
       id: tx.id,
       fromTo: tx.customerName,
       amount: `₦${tx.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`,
-      type: tx.paymentMethod === 'bank_transfer' ? 'Deposit' : 'Withdrawal', // Logic based on your image
+      type: tx.paymentMethod === 'bank_transfer' ? 'Deposit' : 'Withdrawal', 
       date: formattedDate,
       status: tx.status.toUpperCase(),
     };
@@ -63,10 +63,10 @@ const fetchTransactions = async (): Promise<TransactionRow[]> => {
 const exportToCSV = (filename: string, rows: any[]) => {
   if (!rows || !rows.length) return;
 
-  // 1. Define headers based on your table columns
+  //  headers defined based on  table columns
   const headers = ['Transaction ID', 'From/To', 'Amount', 'Type', 'Date', 'Status'];
   
-  // 2. Map the data to match the header order
+  // data mapped  to match the header order
   const csvContent = [
     headers.join(','), 
     ...rows.map(row => [
@@ -79,7 +79,7 @@ const exportToCSV = (filename: string, rows: any[]) => {
     ].join(','))
   ].join('\n');
 
-  // 3. Create a Blob and trigger download
+  //  Created a Blob and trigger download
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
   const link = document.body.appendChild(document.createElement('a'));
   const url = URL.createObjectURL(blob);
@@ -246,7 +246,7 @@ const Finance = () => {
           </tbody>
         </table>
 
-        {/* 4. Pagination Footer */}
+        {/*  Pagination Footer */}
         <div className="p-4 flex justify-between items-center border-t border-gray-50">
           <button className="flex items-center gap-1 px-2 py-1 md:px-3 border border-gray-200 rounded-md md:text-sm text-gray-400 hover:cursor-pointer hover:bg-gray-50">
             <ArrowLeft size={16} /> <span className='text-black font-semibold hidden md:block'>Previous</span>
